@@ -4,7 +4,7 @@ import pprint
 from discord.ext import commands
 
 
-TOKEN = "NzA0NzQ4NTg2NjgzOTkwMjk2.Xqhrrg.bY_G1Psne7UuXBQ9pJsPQlhGiP4"
+TOKEN = "TOKEN"
 bot = commands.Bot(command_prefix='!')
 
 
