@@ -27,14 +27,12 @@ async def on_message(message):
         await message.channel.send('d')
     content = message.content.lower()
     # Посхалки
-    if 'ты где' in content:
+    if 'ты где' in content or 'где ты' in content:
         await message.channel.send("Где-же андрюша-неровная спинуша?")
     if 'потерялась' in content:
         await message.channel.send("андрюша-неровная спинуша")
-    if 'кто ты' in content:
+    if 'кто ты' in content or 'ты кто' in content:
         await message.channel.send('Я есть творение Koh(a). Буду помогать вам.')
-
-            break
     dog = ['соба', 'щено', 'пёс', 'пес']
     for i in dog:
         if i in message.content.lower():
@@ -43,7 +41,6 @@ async def on_message(message):
                 json_response = response.json()
                 await message.channel.send(f"{json_response['message']}")
             break
-
     await bot.process_commands(message)
 
 
