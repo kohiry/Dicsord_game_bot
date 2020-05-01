@@ -34,15 +34,8 @@ async def on_message(message):
     if 'кто ты' in content:
         await message.channel.send('Я есть творение Koh(a). Буду помогать вам.')
 
-    cat = ['кот', 'кошк']
-    for i in cat:
-        if i in message.content.lower():
-            response = requests.get('https://api.thecatapi.com/v1/images/search')
-            if response:
-                json_response = response.json()
-                await message.channel.send(f"{json_response[0]['url']}")
             break
-    dog = ['соба', 'щено']
+    dog = ['соба', 'щено', 'пёс', 'пес']
     for i in dog:
         if i in message.content.lower():
             response = requests.get('https://dog.ceo/api/breeds/image/random')
