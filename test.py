@@ -2,6 +2,7 @@ import discord
 import requests
 import pprint
 from discord.ext import commands
+import random
 
 
 TOKEN = "TOKEN"
@@ -21,12 +22,30 @@ async def rules(self):
     await self.send(text)
 
 
+@bot.command(name='rename')
+async def renames(self):
+    await bot.guilds[0].members[1].edit(nick=None)
+    await bot.guilds[0].members[1].edit(nick="1")
+    count = 1
+    for member in bot.guilds[0].members:  # bot.guilds[1] - Mafia party сервер, пока не знаю как определить гильдию отправителя
+        try:
+            await member.edit(nick=str(count)) # or do whatever you wish with the member detail
+            count += 1
+        except discord.errors.Forbidden:
+            print('Нет прав на переименование, скипаю')
+        except Exception:
+            print('ушёл куда-то нитуда')
+
+    # await self.send('#')  # таким образом буду автоматически вызывать нужные мне команды
+
 @bot.event
 async def on_message(message):
     if message.content.startswith('-debug'):
         await message.channel.send('d')
     content = message.content.lower()
     # Посхалки
+    if '#' in content:
+        await message.channel.send("Сработала скртая команда")
     if 'ты где' in content or 'где ты' in content:
         await message.channel.send("Где-же андрюша-неровная спинуша?")
     if 'потерялась' in content:
