@@ -3,6 +3,7 @@ import requests
 import pprint
 from discord.ext import commands
 import random
+import random_roles
 
 
 TOKEN = "TOKEN"
