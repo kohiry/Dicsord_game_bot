@@ -17,7 +17,7 @@ def main():
                 roles_users[i].append(user)
             except KeyError:
                 roles_users[i] = [user]
-    roles_users[random.choice(not_offical_roles)] = [users[0]]  # баём ост юзеру доп роль
+    roles_users[random.choice(not_offical_roles)] = [users[0]]  # даём ост юзеру доп роль
     pprint.pprint(roles_users) #наши роли
     return roles_users
 

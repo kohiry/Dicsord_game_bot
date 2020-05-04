@@ -19,6 +19,7 @@ def check(key_drop):
         print('код подошёл')
         return True
 
+
 @bot.command(name='helpU')
 async def help(self, key):
     if check(key):
@@ -30,7 +31,12 @@ async def help(self, key):
 async def rules(self, key):
     if check(key):
         text = ''
-        with open('rules.txt') as f:
+        with open('rules_step.txt') as f:
+            text = ' '.join(f.readlines())
+        await self.send(text)
+        await self.send('_ _')
+        text = ''
+        with open('rules_card.txt') as f:
             text = ' '.join(f.readlines())
         await self.send(text)
 
@@ -41,12 +47,26 @@ async def renames(self, key):
         count = 1
         for member in bot.guilds[0].members:  # bot.guilds[1] - Mafia party сервер, пока не знаю как определить гильдию отправителя
             try:
-                await member.edit(nick=str(count)) # or do whatever you wish with the member detail
+                await member.edit(nick=None) # or do whatever you wish with the member detail
                 count += 1
             except discord.errors.Forbidden:
                 print('Нет прав на переименование, скипаю')
 
     # await self.send('#')  # таким образом буду автоматически вызывать нужные мне команды
+
+
+@bot.command(name='move')
+async def move(self, key):
+    if check(key):
+        voice = discord.channel.VoiceChannel
+        voices_channels = []
+        for i in bot.guilds[0].channels:
+            if type(i) == voice:
+                voices_channels.append(i)
+        await bot.guilds[0].members[1].move_to(voices_channels[3])
+        #for i in bot.guilds[0].members:
+            #print(i)  #move_to()
+
 
 @bot.event
 async def on_message(message):
