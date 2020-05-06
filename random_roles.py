@@ -1,11 +1,19 @@
-def main():
+def main(count_players):
     import random
     import pprint
 
 
-    offical_roles = {'Мирный житель': 5, 'Мафия': 2, 'Дон мафии': 1, 'Комиссар': 1, 'Доктор': 1}
-    not_offical_roles = ['Оборотень', 'Маньяк', 'Проститутка', 'Алкаш']
-    users = [str(i) for i in range(1, 13)]
+    users = [str(i) for i in range(1, count_players + 1)]
+    not_offical_roles = ['Оборотень', 'Маньяк', 'Проститутка', 'Алкаш', 'Смертник']
+    offical_roles = {}
+    add_role = 2
+    if count_players > 12:
+        offical_roles = {'Мирный житель': count_players - 7, 'Мафия': 2, 'Дон-мафии': 1, 'Комиссар': 1, 'Доктор': 1, 'Дополнительная роль': 2}
+    if count_players == 12:
+        offical_roles = {'Мирный житель': 5, 'Мафия': 2, 'Дон-мафии': 1, 'Комиссар': 1, 'Доктор': 1, 'Дополнительная роль': 2}
+    if count_players < 12:
+        offical_roles = {'Мирный житель': count_players - 6, 'Мафия': 2, 'Дон-мафии': 1, 'Комиссар': 1, 'Доктор': 1, 'Дополнительная роль': 1}
+        add_role -= 1
     list_keys = offical_roles.keys()
     roles_users = {}
     for i in list_keys:  #бегу по списку ключей офиц ролей
@@ -17,10 +25,12 @@ def main():
                 roles_users[i].append(user)
             except KeyError:
                 roles_users[i] = [user]
-    roles_users[random.choice(not_offical_roles)] = [users[0]]  # даём ост юзеру доп роль
-    pprint.pprint(roles_users) #наши роли
+    random.shuffle(not_offical_roles)
+    print(not_offical_roles[0:add_role])  # даём ост юзеру доп роль
+    pprint.pprint(roles_users)
     return roles_users
 
 
 if __name__ == '__main__':
-    main()
+        main(int(input())) #наши роли main()
+        input()
