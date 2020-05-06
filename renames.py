@@ -19,25 +19,29 @@ def check(key_drop):
 async def renames(self, key):
     if check(key):
         count = 1
-        for member in bot.guilds[0].members:  # bot.guilds[1] - Mafia party сервер, пока не знаю как определить гильдию отправителя
-            try:
-                if member.__str__() not in ['Оутсайдер#6307', 'Helper#0261', 'seijuko#1575', 'kohiry#9498']:
-                    await member.edit(nick=str(count)) # or do whatever you wish with the member detail
-                    count += 1
-            except discord.errors.Forbidden:
-                print('Нет прав на переименование, скипаю')
+        stop = True
+        for i in bot.guilds[0].channels:
 
-    # await self.send('#')  # таким образом буду автоматически вызывать нужные мне команды
+            if i.name == "Основной-голосовой":
+                for member in i.members:
+                    print(member)
+                    try:
+                        if member.__str__() not in ['Оутсайдер#6307', 'Helper#0261', 'kohiry#9498']:
+                            await member.edit(nick=str(count)) # or do whatever you wish with the member detail
+                            count += 1
+                    except discord.errors.Forbidden:
+                        print('Нет прав на переименование, скипаю')
+                        continue
+                break
 
 
 @bot.command(name='renameRev')
-async def renamesRev(self, key):
-    if check(key):
-        for member in bot.guilds[0].members:  # bot.guilds[0] - Mafia party сервер, пока не знаю как определить гильдию отправителя
-            try:
-                await member.edit(nick=None) # or do whatever you wish with the member detail
-            except discord.errors.Forbidden:
-                print('Нет прав на переименование, скипаю')
+async def renamesRev(self):
+    for member in bot.guilds[0].members:  # bot.guilds[0] - Mafia party сервер, пока не знаю как определить гильдию отправителя
+        try:
+            await member.edit(nick=None) # or do whatever you wish with the member detail
+        except discord.errors.Forbidden:
+            print('Нет прав на переименование, скипаю')
 
 
 bot.run(TOKEN)
