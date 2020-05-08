@@ -22,12 +22,12 @@ def check(key_drop):
 async def rules(self, key):
     if check(key):
         text = ''
-        with open('rules_step.txt') as f:
+        with open('rules/rules_step.txt') as f:
             text = ' '.join(f.readlines())
         await self.send(text)
         await self.send('_ _')
         text = ''
-        with open('rules_card.txt') as f:
+        with open('rules/rules_card.txt') as f:
             text = ' '.join(f.readlines())
         await self.send(text)
 
