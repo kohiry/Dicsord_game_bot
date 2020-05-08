@@ -1,7 +1,6 @@
 import discord
 import pprint
 from discord.ext import commands
-import random_roles
 import requests
 
 
@@ -9,8 +8,6 @@ TOKEN = "NzA0NzQ4NTg2NjgzOTkwMjk2.Xq7CvQ.6JNSN1e6NC40hmEf55AO-p6FJhI"
 bot = commands.Bot(command_prefix='!')
 key = '_**.**_'
 
-roles = random_roles.main()
-pprint.pprint(roles)
 
 def check(key_drop):
     if key != key_drop:
