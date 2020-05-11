@@ -3,7 +3,7 @@ from discord.ext import commands
 import random_roles
 
 
-TOKEN = "NzA0NzQ4NTg2NjgzOTkwMjk2.Xq7CvQ.6JNSN1e6NC40hmEf55AO-p6FJhI"
+TOKEN = "NzA5MzUxMzI0NzEzNDg0MzE4.XrkpIg.g8IGzFFRUeS_F1rdfX0LEUD6O-s"
 bot = commands.Bot(command_prefix='!')
 key = '_**.**_'
 
