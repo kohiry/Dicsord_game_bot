@@ -5,7 +5,7 @@ import asyncio
 import random
 
 
-TOKEN = "NzA5MzUxMzI0NzEzNDg0MzE4.Xrl9yQ.8KVfIAQCcEQSu8Q5vPTWG0LBb04"
+TOKEN = "TOKEN"
 bot = commands.Bot(command_prefix='!')
 key = '_**.**_'
 count_work = 0
@@ -23,13 +23,14 @@ def check(key_drop):
 
 
 @bot.command(name='renameReverse')
-async def renamesRev(self):
+async def renamesRev(self, key):
     '''Удаляет все никнейми участников сервера'''
-    for member in self.guild.members:  # bot.guilds[0] - Mafia party сервер, пока не знаю как определить гильдию отправителя
-        try:
-            await member.edit(nick=None) # or do whatever you wish with the member detail
-        except discord.errors.Forbidden:
-            print('Нет прав на переименование, скипаю')
+    if check(key):
+        for member in self.guild.members:  # bot.guilds[0] - Mafia party сервер, пока не знаю как определить гильдию отправителя
+            try:
+                await member.edit(nick=None) # or do whatever you wish with the member detail
+            except discord.errors.Forbidden:
+                print('Нет прав на переименование, скипаю')
 
 
 @bot.command(name='create-channel')  # !create-channel _**.**_

@@ -5,7 +5,7 @@ import asyncio
 import random
 
 
-TOKEN = "NzA5MzUxMzI0NzEzNDg0MzE4.Xrl9yQ.8KVfIAQCcEQSu8Q5vPTWG0LBb04"
+TOKEN = "TOKEN"
 bot = commands.Bot(command_prefix='!')
 key = '_**.**_'
 count_work = 0
@@ -42,34 +42,46 @@ async def move(self, key):
 
 
 @bot.command(name='moveReverse')
-async def moveReverse(self):
+async def moveReverse(self, key):
     '''Возвращвет участников в "Основной-голосовой"'''
-    # образование списка с кналами войс чата
-    stop = True
-    for i in self.guild.channels:
-        if i.name == "Основной-голосовой":
-            for member in bot.guilds[0].members:
-                await member.move_to(i)
-            break
+    if check(key):
+        # образование списка с кналами войс чата
+        stop = True
+        for i in self.guild.channels:
+            if i.name == "Основной-голосовой":
+                for member in bot.guilds[0].members:
+                    await member.move_to(i)
+                break
 
 
 @bot.command(name='rename')
-async def renames(self):
+async def renames(self, key):
     '''Переименовывает участников голосового канала в цифри для игры'''
-    count = 1
-    stop = True
-    for i in self.guild.channels:
-        if i.name == "Основной-голосовой":
-            for member in i.members:
-                print(member)
-                try:
-                    if member.__str__() not in ['Оутсайдер#6307', 'Helper#0261', 'kohiry#9498']:
-                        await member.edit(nick=str(count)) # or do whatever you wish with the member detail
-                        count += 1
-                except discord.errors.Forbidden:
-                    print('Нет прав на переименование, скипаю')
-                    continue
-            break
+    if check(key):
+        count = 1
+        stop = True
+        for i in self.guild.channels:
+            if i.name == "Основной-голосовой":
+                for member in i.members:
+                    print(member)
+                    try:
+                        if member.__str__() not in ['Оутсайдер#6307', 'Helper#0261', 'kohiry#9498']:
+                            await member.edit(nick=str(count)) # or do whatever you wish with the member detail
+                            count += 1
+                    except discord.errors.Forbidden:
+                        print('Нет прав на переименование, скипаю')
+                        continue
+                break
+
+@bot.command(name='renameReverse')
+async def renamesRev(self, key):
+    '''Удаляет все никнейми участников сервера'''
+    if check(key):
+        for member in self.guild.members:  # bot.guilds[0] - Mafia party сервер, пока не знаю как определить гильдию отправителя
+            try:
+                await member.edit(nick=None) # or do whatever you wish with the member detail
+            except discord.errors.Forbidden:
+                print('Нет прав на переименование, скипаю')
 
 
 bot.run(TOKEN)
